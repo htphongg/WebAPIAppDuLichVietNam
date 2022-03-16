@@ -159,8 +159,6 @@ class BaiVietController extends Controller
 
     public function vietBai(Request $req)
     {
-        
-
         $success = [ "state" => "true", "message" => "Viết bài đánh giá thành công."];
                     
         $failed = ["state" => "false","message" => "Viết bài đánh giá thất bại"];
