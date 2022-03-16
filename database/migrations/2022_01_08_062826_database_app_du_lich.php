@@ -20,18 +20,25 @@ class DatabaseAppDuLich extends Migration
             $table->string('mat_khau');
             $table->string('ho_ten');    
             $table->string('email');    
+            $table->boolean('trang_thai_email');
             $table->string('so_dien_thoai');    
-            // $table->string('trang_thai_hien_thi');      
+            $table->boolean('trang_thai_sdt'); 
             $table->timestamps();
             $table->softDeletes();
         });
 
-
-
-        Schema::create('yeu_thich', function (Blueprint $table) {
+        Schema::create('yeu_thich_dia_danh', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('nguoi_dung_id');
             $table->integer('dia_danh_id');      
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('yeu_thich_bai_viet', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('nguoi_dung_id');
+            $table->integer('bai_viet_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -47,6 +54,7 @@ class DatabaseAppDuLich extends Migration
             $table->integer('luot_thich');
             $table->double('kinh_do');
             $table->double('vi_do');
+            $table->boolean('trang_thai_cho');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -78,7 +86,6 @@ class DatabaseAppDuLich extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
 
         Schema::create('anh_nha_tro', function (Blueprint $table) {
             $table->increments('id');
@@ -144,9 +151,6 @@ class DatabaseAppDuLich extends Migration
             $table->softDeletes();
         });
 
-
-
-
         Schema::create('anh_bai_viet', function (Blueprint $table) {
             $table->increments('id');
             $table->string('path');
@@ -155,6 +159,32 @@ class DatabaseAppDuLich extends Migration
             $table->softDeletes();
         });
 
+        Schema::create('bai_viet', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('tieu_de');
+            $table->string('noi_dung',1000);
+            $table->date('ngay_dang');
+            $table->integer('dia_danh_id');
+            $table->integer('nguoi_dung_id');
+            $table->string('so_luot_thich');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('hoat_dong', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('ten');  
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('khong_yeu_thich_bai_viet', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('nguoi_dung_id');
+            $table->integer('bai_viet_id');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -165,7 +195,7 @@ class DatabaseAppDuLich extends Migration
     public function down()
     {
         Schema::dropIfExists('nguoi_dung');
-        Schema::dropIfExists('yeu_thich');
+        Schema::dropIfExists('yeu_thich_dia_danh');
         Schema::dropIfExists('anh_bai_viet');
         Schema::dropIfExists('dia_danh');
         Schema::dropIfExists('anh_dia_danh');
@@ -178,5 +208,9 @@ class DatabaseAppDuLich extends Migration
         Schema::dropIfExists('anh_mon_an');
         Schema::dropIfExists('vung');
         Schema::dropIfExists('mien');
+        Schema::dropIfExists('bai_viet');
+        Schema::dropIfExists('hoat_dong');
+        Schema::dropIfExists('yeu_thich_bai_viet');
+        Schema::dropIfExists('khong_yeu_thich_bai_viet');
     }
 }
