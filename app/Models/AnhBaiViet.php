@@ -9,6 +9,8 @@ class AnhBaiViet extends Model
 {
     use HasFactory;
     protected $table = 'anh_bai_viet';
+    protected $hidden = ['created_at','updated_at','deleted_at'];
+
 
     public function baiViet()
     {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NguoiDung;
 use App\Models\BaiViet;
+use App\Models\AnhBaiViet;
 use App\Models\YeuThichBaiViet;
 use App\Models\DiaDanh;
 use App\Models\KhongYeuThichBaiViet;
@@ -156,35 +157,48 @@ class BaiVietController extends Controller
             return json_encode([$failed]);
     }
 
-    public function vietBai($nguoi_dung_id, $dia_danh_id, $tieude, $noidung)
+    public function vietBai(Request $req)
     {
+        
 
         $success = [ "state" => "true", "message" => "Viết bài đánh giá thành công."];
                     
         $failed = ["state" => "false","message" => "Viết bài đánh giá thất bại"];
 
-        if($nguoi_dung_id != null && $dia_danh_id != null && $tieude != null && $noidung != null)
+        if($req->user_id != null && $req->dia_danh_id != null && $req->tieu_de != null && $req->noi_dung != null)
         {
-            
-
+            //Tao bai viet
             $baiViet = new BaiViet();
             
-            $baiViet->tieu_de = $tieude;
-            $baiViet->noi_dung = $noidung;
+            $baiViet->tieu_de = $req->tieu_de;
+            $baiViet->noi_dung = $req->noi_dung;
             $baiViet->ngay_dang = Carbon::now('Asia/Ho_Chi_Minh');
-            $baiViet->dia_danh_id = $dia_danh_id;
-            $baiViet->nguoi_dung_id = $nguoi_dung_id;
+            $baiViet->dia_danh_id = $req->dia_danh_id;
+            $baiViet->nguoi_dung_id = $req->user_id;
+            $baiViet->rate = $req->rate;
             $baiViet->so_luot_thich = "0";
-
-            $diaDanh = DiaDanh::find($dia_danh_id);
-            $diaDanh->luot_checkin+= 1;
-            $diaDanh->save();
-            
             $baiViet->save();
 
-            return json_encode([$success]);
+            //Theem luot checkin
+            $diaDanh = DiaDanh::find($req->dia_danh_id);
+            $diaDanh->luot_checkin+= 1;
+            $diaDanh->save();
+
+            //Them anh dia danh
+            if($req->images != null)
+            {
+                $anhDiaDanh = new AnhBaiViet();
+
+                $anhDiaDanh->path = "http://10.0.2.2:8000/anhbaiviet/$baiViet->id/" .$req->images->getClientOriginalName();
+                $req->images->storeAs("anhbaiviet/$baiViet->id", $req->images->getClientOriginalName());
+                $anhDiaDanh->bai_viet_id = $baiViet->id;
+
+                $anhDiaDanh->save();
+            }
+        
+            return response()->json($success, 200, $success);
         }
         else
-            return json_encode([$failed]);
+            return response()->json($failed, 200,$failed );
     }
 }

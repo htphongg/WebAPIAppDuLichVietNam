@@ -79,7 +79,6 @@ Route::get('/ds-anh-nha-tro/{id}',[NhaTroController::class,'layDsHinhAnhNhaTro']
 //Bài viết
 Route::get('ds-bai-viet',[BaiVietController::class,'layTatCaBaiViet']);
 Route::get('ds-bai-viet-noi-bat',[BaiVietController::class,'layBaiVietNoiBat']);
-Route::get('viet-bai/{userid}/{ddId}/{tieude}/{noidung}',[BaiVietController::class,'vietBai']);
 Route::get('/thong-tin-nguoi-dung/{id}',[BaiVietController::class,'layThongTinNguoiViet']);
 Route::get('/dia-danh/{id}',[BaiVietController::class,'layTTinDiaDanh']);
 Route::get('/ds-anh-bai-viet/{id}',[BaiVietController::class,'layDsAnhBaiViet']);

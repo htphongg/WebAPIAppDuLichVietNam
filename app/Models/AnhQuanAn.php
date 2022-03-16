@@ -10,6 +10,8 @@ class AnhQuanAn extends Model
     use HasFactory;
 
     protected $table = 'anh_quan_an';
+    protected $hidden = ['created_at','updated_at','deleted_at'];
+
 
     public function quanAn()
     {

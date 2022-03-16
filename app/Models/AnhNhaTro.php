@@ -9,6 +9,8 @@ class AnhNhaTro extends Model
 {
     use HasFactory;
     protected $table = 'anh_nha_tro';
+    protected $hidden = ['created_at','updated_at','deleted_at'];
+
 
     public function nhaTro()
     {

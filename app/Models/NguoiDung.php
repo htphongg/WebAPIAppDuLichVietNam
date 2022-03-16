@@ -11,6 +11,8 @@ class NguoiDung extends Authenticatable
     use HasFactory;
     protected $fillable = ['mat_khau'];
     protected $table = 'nguoi_dung';
+    protected $hidden = ['created_at','updated_at','deleted_at'];
+
 
     public function getPasswordAttribute()
     {

@@ -10,6 +10,8 @@ class MonAn extends Model
     use HasFactory;
 
     protected $table = 'mon_an';
+    protected $hidden = ['created_at','updated_at','deleted_at'];
+
 
     public function diaDanh()
     {

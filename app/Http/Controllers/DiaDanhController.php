@@ -179,7 +179,7 @@ class DiaDanhController extends Controller
     //API
     public function layThongTinDiaDanh($dia_danh_id)
     {
-        $dia_danh = DiaDanh::find($dia_danh_id);      
+        $dia_danh = DiaDanh::find($dia_danh_id)->exclute('deleted_at');      
         return json_encode($dia_danh);
     }
 
@@ -242,7 +242,7 @@ class DiaDanhController extends Controller
 
     public function layDsBaiViet($dia_danh_id)
     {
-        $dsBaiViet = DiaDanh::find($dia_danh_id)->dsBaiViet;
+        $dsBaiViet = DiaDanh::find($dia_danh_id)->dsBaiViet->sortDesc()->values()->all();
         return json_encode($dsBaiViet);
     }
 
@@ -298,11 +298,11 @@ class DiaDanhController extends Controller
         $now =  (Carbon::now('Asia/Ho_Chi_Minh'));
         $dsDiaDanhMoi = [];
 
-        $dsDiaDanh = DiaDanh::all();
+        $dsDiaDanh = DiaDanh::where('trang_thai_cho','=',1)->get();
 
         foreach($dsDiaDanh as $diaDanh)
         {
-           if( $diaDanh->created_at->format('d') >= Carbon::now()->day - 1 &&  $diaDanh->created_at->format('d') <= Carbon::now()->day)
+           if( $diaDanh->created_at->format('d') >= Carbon::now()->day - 3 &&  $diaDanh->created_at->format('d') <= Carbon::now()->day)
            {
                 array_push($dsDiaDanhMoi,$diaDanh);
            }

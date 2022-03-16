@@ -11,6 +11,11 @@
 <body>
     <div class="container">
         <h2>Chỉnh sửa thông tin địa danh</h2>
+        <div class="lst-btn mb-3">
+            <button type="submit" class="btn btn-primary">Thêm món ăn</button>
+            <button type="submit" class="btn btn-primary">Thêm quán ăn</button>
+            <button type="submit" class="btn btn-primary">Thêm nhà trọ</button>
+        </div>
         <form action="{{ route('xl-chinh-sua-dia-danh',['id' => $diaDanh->id]) }}" class="was-validated" method="post">
             @csrf
         <div class="form-group">
@@ -66,7 +71,7 @@
             <div class="valid-feedback">Hợp lệ.</div>
             <div class="invalid-feedback">Vui lòng điền vào trường này.</div>
         </div>
-            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <button type="submit" class="btn btn-primary ">Cập nhật</button>
         </form>
     </div>
 </body>

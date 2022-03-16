@@ -10,6 +10,7 @@ class Mien extends Model
     use HasFactory;
 
     protected $table = 'mien';
+    protected $hidden = ['created_at','updated_at','deleted_at'];
 
     public function dsDiaDanh()
     {

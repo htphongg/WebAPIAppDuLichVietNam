@@ -10,7 +10,7 @@ class DiaDanh extends Model
     use HasFactory;
     protected $table = 'dia_danh';
     protected $fillable = ['luot_thich'];
-   
+    protected $hidden = ['created_at','updated_at','deleted_at'];
 
     public function dsHinhAnh()
     {

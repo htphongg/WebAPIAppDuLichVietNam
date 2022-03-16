@@ -96,7 +96,7 @@ class NguoiDungController extends Controller
 
     public function layDsBaiViet($nguoi_dung_id)
     {
-        $dsBaiViet = NguoiDung::find($nguoi_dung_id)->dsBaiViet;
+        $dsBaiViet = NguoiDung::find($nguoi_dung_id)->dsBaiViet->sortDesc()->values()->all();
         return json_encode($dsBaiViet);
     }
 
