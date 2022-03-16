@@ -342,7 +342,7 @@ class DiaDanhController extends Controller
             $diaDanh->avt = "";
             $diaDanh->ten = $ten_dia_danh;
             $diaDanh->mo_ta = $mo_ta;
-            $diaDanh->mien_id = $mien->id;
+            $diaDanh->mien_id = $mienn->id;
             $diaDanh->vung_id = $vungg->id;
             $diaDanh->luot_checkin = 0;
             $diaDanh->luot_thich = 0;
