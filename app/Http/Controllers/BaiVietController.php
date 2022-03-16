@@ -189,7 +189,7 @@ class BaiVietController extends Controller
             {
                 $anhDiaDanh = new AnhBaiViet();
 
-                $anhDiaDanh->path = "http://10.0.2.2:8000/anhbaiviet/$baiViet->id/" .$req->images->getClientOriginalName();
+                $anhDiaDanh->path = "https://travellappp.herokuapp.com/anhbaiviet/$baiViet->id/" .$req->images->getClientOriginalName();
                 $req->images->storeAs("anhbaiviet/$baiViet->id", $req->images->getClientOriginalName());
                 $anhDiaDanh->bai_viet_id = $baiViet->id;
 

@@ -167,6 +167,7 @@ class DatabaseAppDuLich extends Migration
             $table->integer('dia_danh_id');
             $table->integer('nguoi_dung_id');
             $table->string('so_luot_thich');
+            $table->integer('rate');
             $table->timestamps();
             $table->softDeletes();
         });
