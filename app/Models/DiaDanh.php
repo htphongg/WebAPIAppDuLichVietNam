@@ -59,6 +59,6 @@ class DiaDanh extends Model
 
     public function nguoi_dung()
     {
-        return $this->belongsToMany('App\Models\nguoiDung','yeu_thich_dia_danh')->withTimestamps();
+        return $this->belongsToMany('App\Models\NguoiDung','yeu_thich_dia_danh')->withTimestamps();
     }
 }
